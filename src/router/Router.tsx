@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { SignupPage } from "../pages";
+import { LoginPage } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
