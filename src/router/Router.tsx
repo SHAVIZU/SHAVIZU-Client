@@ -1,12 +1,11 @@
 import { FC } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Main from "../components/Main";
-
+import { LoginPage } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
