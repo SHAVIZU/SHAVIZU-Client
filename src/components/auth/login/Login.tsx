@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import * as S from "./styles";
+import * as S from "../styles";
 
 const Login: FC = (): JSX.Element => {
   return (

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import Login from "../../components/login/Login";
+import Login from "../../components/auth/login/Login";
 const LoginPage: FC = (): JSX.Element => {
   return (
     <>
