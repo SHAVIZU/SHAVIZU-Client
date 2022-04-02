@@ -10,12 +10,12 @@ export const Container = styled.div`
 `
 export const Title = styled.h1`
     font-weight: 700;
-    font-size: 48px;
-    margin-bottom: 32px;
+    font-size: 36px;
+    margin-bottom: 24px;
 `;
 export const Input = styled.input`
-    width: 600px;
-    height: 64px;
+    width: 500px;
+    height: 60px;
     background-color: white;
     border:none;
     border-bottom: 1px solid black;
@@ -35,14 +35,14 @@ export const LoginProblem = styled.span`
     margin-top: 8px;
 `;
 export const Submit = styled.div`
-    width: 600px;
-    height: 80px;
+    width: 500px;
+    height: 60px;
     background-color: #55B6CE;
     border-radius: 8px;
     color: white;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 500;
     text-align:center;
-    line-height: 75px;
-    margin-top: 58px;
+    line-height: 60px;
+    margin-top: 40px;
 `;
