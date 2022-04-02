@@ -33,6 +33,9 @@ export const LoginProblem = styled.span`
     font-size: 12px;
     text-decoration: underline;
     margin-top: 8px;
+    :hover{
+        cursor: pointer;
+    }
 `;
 export const Submit = styled.div`
     width: 500px;
