@@ -11,16 +11,16 @@ export const Container = styled.div`
 export const Title = styled.h1`
     font-weight: 700;
     font-size: 36px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 `;
 export const Input = styled.input`
     width: 500px;
-    height: 60px;
+    height: 50px;
     background-color: white;
     border:none;
     border-bottom: 1px solid black;
     outline: none;
-    margin-top: 48px;
+    margin-top: 32px;
     box-sizing:border-box;
     padding-left: 24px;
     font-size: 18px;
@@ -48,4 +48,16 @@ export const Submit = styled.div`
     text-align:center;
     line-height: 60px;
     margin-top: 40px;
+`;
+export const SignupStepBox = styled.div`
+    width: 100px;
+    height: 10px;
+    display: flex;
+    justify-content: space-between;
+`
+export const SignupStep = styled.div`
+    width: 10px;
+    height: 10px;
+    border-radius:50%;
+    background-color: #55B6CE;
 `;
