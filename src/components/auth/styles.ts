@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { BackgroundColor } from '../../style/color'
 export const Container = styled.div`
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: ${BackgroundColor};
     display: flex;
@@ -33,9 +33,7 @@ export const LoginProblem = styled.span`
     font-size: 12px;
     text-decoration: underline;
     margin-top: 8px;
-    :hover{
         cursor: pointer;
-    }
 `;
 export const Submit = styled.div`
     width: 500px;
@@ -48,6 +46,16 @@ export const Submit = styled.div`
     text-align:center;
     line-height: 60px;
     margin-top: 40px;
+    display: flex;
+    text-align: center;
+    span{
+        color: white;
+        border-left: 1px solid white;
+        width: 50%;
+    }
+    cursor: pointer;
+    justify-content: space-around;
+    align-items: center;
 `;
 export const SignupStepBox = styled.div`
     width: 100px;

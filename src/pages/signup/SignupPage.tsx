@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import FirstSignup from "../../components/auth/signup/FirstSignup";
+import SecondSignup from "../../components/auth/signup/SecondSignup";
 import * as S from "../../components/auth/styles";
 const SignupPage: FC = (): JSX.Element => {
   return (
@@ -11,7 +11,7 @@ const SignupPage: FC = (): JSX.Element => {
           <S.SignupStep />
           <S.SignupStep />
         </S.SignupStepBox>
-        <FirstSignup />
+        <SecondSignup />
       </S.Container>
     </>
   );
