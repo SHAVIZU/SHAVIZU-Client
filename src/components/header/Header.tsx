@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import * as S from "./styles";
 import {
   Logo,
@@ -8,7 +8,7 @@ import {
   CloseIcon,
   SelectIcon,
 } from "../../assets";
-const Header = () => {
+const Header: FC = (): JSX.Element => {
   const topic = ["스타일 코드", "제품 이름", "브랜드"];
   const filter = ["상의", "하의", "아우터", "풋웨어", "아이웨어"];
   const [isOpenCategory, setIsOpenCategory] = useState(false);
