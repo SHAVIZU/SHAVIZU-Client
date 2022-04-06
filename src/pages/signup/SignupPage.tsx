@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import SecondSignup from "../../components/auth/signup/SecondSignup";
-import * as S from "../../components/auth/styles";
+import SecondSignup from "../../components/admin/auth/signup/SecondSignup";
+import * as S from "../../components/admin/auth/styles";
 const SignupPage: FC = (): JSX.Element => {
   return (
     <>
