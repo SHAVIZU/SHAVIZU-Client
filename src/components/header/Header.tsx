@@ -13,7 +13,7 @@ const Header = () => {
   const filter = ["상의", "하의", "아우터", "풋웨어", "아이웨어"];
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const [searchTopic, setSearchTopic] = useState("스타일 코드");
+  const [searchTopic, setSearchTopic] = useState("도로명 주소");
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -33,6 +33,7 @@ const Header = () => {
             defaultChecked={!isOpenCategory}
             onClick={() => {
               setIsOpenCategory(false);
+              setSearchTopic("도로명 주소");
             }}
           />
         </S.SelectFilter>
@@ -49,6 +50,7 @@ const Header = () => {
             defaultChecked={isOpenCategory}
             onChange={() => {
               setIsOpenCategory(true);
+              setSearchTopic("스타일 코드");
             }}
           />
         </S.SelectFilter>
