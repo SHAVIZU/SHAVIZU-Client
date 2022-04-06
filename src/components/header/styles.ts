@@ -21,7 +21,6 @@ export const Header = styled.div`
     outline: none;
     position: relative;
     cursor: pointer;
-    /* -webkit-transition: background 0.3s, border-color 0.3s, box-shadow 0.2s; */
     transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
     border-radius: 50%;
     &:after {
