@@ -5,4 +5,6 @@
   outline: none;
   text-decoration: none;
   color: black;
+  box-sizing: border-box;
+  font-family: "Apple SD Gothic Neo";
 }
