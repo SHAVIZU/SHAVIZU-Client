@@ -5,7 +5,8 @@ import {
   ChangePwPage,
   SignupPage,
   ProductRegisterPage,
-    ShopIntro
+  ShopIntro,
+  ChangeInfoPage,
 } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
@@ -16,6 +17,7 @@ const Router: FC = (): JSX.Element => {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/product-re" element={<ProductRegisterPage />} />
         <Route path="/shop-intro" element={<ShopIntro />} />
+        <Route path="/change-info" element={<ChangeInfoPage />} />
       </Routes>
     </BrowserRouter>
   );

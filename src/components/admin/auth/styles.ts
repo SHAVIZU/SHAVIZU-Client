@@ -69,3 +69,9 @@ export const SignupStep = styled.div`
     border-radius:50%;
     background-color: #55B6CE;
 `;
+export const Map = styled.div`
+ width: 300px;
+ height: 300px;
+ margin-top: 20px;
+ background-color: #DDDDDD;
+`;
