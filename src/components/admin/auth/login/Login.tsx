@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "../styles";
+import * as S from "../../styles";
 
 const Login: FC = (): JSX.Element => {
   const navigate = useNavigate();
