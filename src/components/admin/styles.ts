@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { BackgroundColor } from '../../../style/color'
+import { BackgroundColor } from '../../style/color'
 export const Container = styled.div`
     width: 100%;
     height: calc(100vh - 80px);
@@ -28,6 +28,7 @@ export const Input = styled.input`
         font-size: 16px;
         color: black;
     }
+    display: block;
 `
 export const LoginProblem = styled.span`
     font-size: 12px;
@@ -68,4 +69,32 @@ export const SignupStep = styled.div`
     height: 10px;
     border-radius:50%;
     background-color: #55B6CE;
+`;
+export const Map = styled.div`
+ width: 300px;
+ height: 300px;
+ margin-top: 20px;
+ background-color: #DDDDDD;
+`;
+export const ProductImg = styled.div`
+    width: 400px;
+    height: 520px;
+    background-color: #DDDDDD;
+    text-align: center;
+    color: #666666;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`
+export const ProductBox = styled.div`
+    display: flex;
+    width: 1000px;
+    justify-content: space-between;
+    margin-top: 50px;
+    & span {
+        color: #AAAAAA;
+        font-weight: 100;
+        margin-top: 10px;
+    }
 `;
