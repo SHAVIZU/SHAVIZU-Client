@@ -1,5 +1,6 @@
 import React from "react";
 import * as S from "../../styles";
+import RangeComponent from "../range/Range";
 const NewProductRegister = () => {
   return (
     <S.Container>
@@ -16,7 +17,7 @@ const NewProductRegister = () => {
           <S.Input placeholder="스타일 코드" />
           <S.Input placeholder="브랜드" />
           <S.Input placeholder="카테고리" />
-          <S.Input placeholder="range가 들어갈 자리" />
+          <RangeComponent />
           <S.Submit>등록</S.Submit>
         </div>
       </S.ProductBox>
