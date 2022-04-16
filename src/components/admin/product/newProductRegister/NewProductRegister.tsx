@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "../../styles";
-import RangeComponent from "../range/Range";
+import RangeComponent from "../range/RangeComponent";
 const NewProductRegister = () => {
   return (
     <S.Container>
