@@ -1,6 +1,5 @@
 import React from "react";
 import * as S from "./styles";
-import Size from "./Size";
 
 const Products = () => {
   return (
@@ -15,7 +14,10 @@ const Products = () => {
         <span>224M122</span>
       </S.Item>
       <S.Stock>
-        <Size />
+        <S.Size>
+          <p>90</p>
+          <p>5</p>
+        </S.Size>
       </S.Stock>
     </S.Product>
   );
