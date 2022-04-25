@@ -11,7 +11,6 @@ export const Header = styled.div`
   height: 100px;
   padding: 0 70px;
   border-bottom: 1px solid #eeeeee;
-  background-color: ${BackgroundColor};
   display: flex;
   align-items: center;
   & input[type="radio"] {
@@ -216,5 +215,16 @@ export const SearchBar = styled.div`
   input::-webkit-search-cancel-button,
   input::-webkit-search-results-decoration {
     display: none;
+  }
+`;
+
+export const ProductRegister = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #eeeeee;
+  margin-left: 32px;
+  > img {
+    margin: 0 12px 0 32px;
   }
 `;

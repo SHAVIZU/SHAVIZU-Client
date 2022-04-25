@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import * as S from "./styles";
 import {
   Logo,
@@ -11,15 +11,28 @@ import {
 const Header: FC = (): JSX.Element => {
   const topic = ["스타일 코드", "제품 이름", "브랜드"];
   const filter = ["상의", "하의", "아우터", "풋웨어", "아이웨어"];
+
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [searchTopic, setSearchTopic] = useState("도로명 주소");
   const [searchValue, setSearchValue] = useState("");
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    console.log(token);
+    if (token !== null) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
+
   return (
     <S.Header>
       <img src={Logo} />
-      <S.Category>
+      <S.Category style={isAdmin ? { display: "none" } : { display: "flex" }}>
         <S.SelectFilter>
           <label htmlFor="shop">
             <img src={SearchShopIcon} alt="" />
@@ -117,6 +130,12 @@ const Header: FC = (): JSX.Element => {
         />
         <img src={CloseIcon} alt="" onClick={() => setSearchValue("")} />
       </S.SearchBar>
+      <S.ProductRegister
+        style={isAdmin ? { display: "flex" } : { display: "none" }}
+      >
+        <img src={SearchItemIcon} alt="" />
+        <span>새로운 판매 제품 등록</span>
+      </S.ProductRegister>
     </S.Header>
   );
 };
