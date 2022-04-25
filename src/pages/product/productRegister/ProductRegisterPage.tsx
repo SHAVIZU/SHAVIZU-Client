@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import NewProductRegister from "../../components/admin/product/newProductRegister/NewProductRegister";
+import ProductRegister from "../../../components/admin/product/productRegister/ProductRegister";
 
 const ProductRegisterPage: FC = (): JSX.Element => {
   return (
     <>
-      <NewProductRegister />
+      <ProductRegister />
     </>
   );
 };

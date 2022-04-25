@@ -4,10 +4,11 @@ import {
   LoginPage,
   ChangePwPage,
   SignupPage,
-  ProductRegisterPage,
+  NewProductRegisterPage,
   ChangeInfoPage,
   ShopIntroPage,
   ShopProductsPage,
+  ProductRegisterPage,
 } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
@@ -16,10 +17,11 @@ const Router: FC = (): JSX.Element => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/change-pw" element={<ChangePwPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/product-re" element={<ProductRegisterPage />} />
+        <Route path="/new-pro" element={<NewProductRegisterPage />} />
         <Route path="/shop-intro" element={<ShopIntroPage />} />
         <Route path="/change-info" element={<ChangeInfoPage />} />
         <Route path="/shop-products" element={<ShopProductsPage />} />
+        <Route path="product-re" element={<ProductRegisterPage />} />
       </Routes>
     </BrowserRouter>
   );
