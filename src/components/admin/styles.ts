@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { BackgroundColor } from '../../style/color'
 export const Container = styled.div`
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 100px);
     background-color: ${BackgroundColor};
     display: flex;
     flex-direction: column;
