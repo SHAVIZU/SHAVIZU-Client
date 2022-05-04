@@ -4,16 +4,16 @@ export const signupRequest = async (
   user_id: string,
   password: string,
   name: string,
-  register_number:string,
+  registration_number:string,
   boss_name: string,
   opening_date: string,
 ) => {
   try {
     const data = {
+      name: name,
       user_id: user_id,
       password: password,
-      name: name,
-      register_number:register_number,
+      registration_number:registration_number,
       boss_name:boss_name,
       opening_date:opening_date
     };
