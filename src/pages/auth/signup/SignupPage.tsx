@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import FirstSignup from "../../../components/admin/auth/signup/FirstSignup";
 import * as S from "../../../components/admin/styles";
-import Header from "../../../components/header/Header";
+import Header from "../../../components/admin/header/Header";
 const SignupPage: FC = (): JSX.Element => {
   return (
     <>
