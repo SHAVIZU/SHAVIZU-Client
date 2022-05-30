@@ -3,9 +3,9 @@ import * as S from "../../header/styles";
 import { Logo } from "../../../assets";
 const Header = () => {
   return (
-    <S.Header>
+    <S.AuthHeader>
       <img src={Logo} alt="" />
-    </S.Header>
+    </S.AuthHeader>
   );
 };
 
