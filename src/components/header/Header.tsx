@@ -31,7 +31,7 @@ const Header: FC = (): JSX.Element => {
 
   return (
     <S.Header>
-      <img src={Logo} />
+      <img src={Logo} alt="" />
       <S.Category style={isAdmin ? { display: "none" } : { display: "flex" }}>
         <S.SelectFilter>
           <label htmlFor="shop">

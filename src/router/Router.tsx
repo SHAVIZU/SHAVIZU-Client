@@ -9,6 +9,7 @@ import {
   ShopIntroPage,
   ShopProductsPage,
   ProductRegisterPage,
+  AdminMainPage,
   ShopMapPage,
 } from "../pages";
 const Router: FC = (): JSX.Element => {
@@ -22,7 +23,8 @@ const Router: FC = (): JSX.Element => {
         <Route path="/shop-intro" element={<ShopIntroPage />} />
         <Route path="/change-info" element={<ChangeInfoPage />} />
         <Route path="/shop-products" element={<ShopProductsPage />} />
-        <Route path="product-re" element={<ProductRegisterPage />} />
+        <Route path="/product-re" element={<ProductRegisterPage />} />
+        <Route path="/main" element={<AdminMainPage />} />
         <Route path="/shop-map" element={<ShopMapPage />} />
       </Routes>
     </BrowserRouter>

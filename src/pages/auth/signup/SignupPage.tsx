@@ -1,17 +1,14 @@
 import React, { FC } from "react";
-import SecondSignup from "../../../components/admin/auth/signup/SecondSignup";
+import FirstSignup from "../../../components/admin/auth/signup/FirstSignup";
 import * as S from "../../../components/admin/styles";
+import Header from "../../../components/admin/header/Header";
 const SignupPage: FC = (): JSX.Element => {
   return (
     <>
+      <Header />
       <S.Container>
         <S.Title>회원가입</S.Title>
-        <S.SignupStepBox>
-          <S.SignupStep />
-          <S.SignupStep />
-          <S.SignupStep />
-        </S.SignupStepBox>
-        <SecondSignup />
+        <FirstSignup />
       </S.Container>
     </>
   );

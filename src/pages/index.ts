@@ -5,5 +5,6 @@ export { default as NewProductRegisterPage } from "./product/NewProductRegisterP
 export { default as ChangeInfoPage } from "./auth/changeInfo/ChangeInfoPage";
 export { default as ShopIntroPage } from "./user/shopIntro/ShopIntroPage";
 export { default as ShopProductsPage } from "./user/shopProducts/ShopProductsPage";
-export { default as ProductRegisterPage } from "./product/productRegister/ProductRegisterPage";
+export { default as ProductRegisterPage} from './product/productRegister/ProductRegisterPage'
+export { default as AdminMainPage} from './adminMain/AdminMainPage'
 export { default as ShopMapPage } from "./user/shopMap/ShopMapPage";
