@@ -1,8 +1,19 @@
 import React from "react";
+import { newProductRegisterRequest } from "../../../../lib/api/productRegister";
 import * as S from "../../styles";
 import RangeComponent from "../range/RangeComponent";
 const NewProductRegister = () => {
-  const searchBrand = () => {};
+  const requestNewProductRegisterApi = () => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      newProductRegisterRequest(token)
+        .then((res) => {
+          console.log(res);
+          window.location.href = "/main";
+        })
+        .catch((err) => console.log(err));
+    }
+  };
   return (
     <S.Container>
       <S.Title>새로운 제품 등록</S.Title>
@@ -23,7 +34,7 @@ const NewProductRegister = () => {
           />
           <S.Input placeholder="카테고리" />
           <RangeComponent />
-          <S.Submit>등록</S.Submit>
+          <S.Submit onClick={requestNewProductRegisterApi}>등록</S.Submit>
         </div>
       </S.ProductBox>
     </S.Container>

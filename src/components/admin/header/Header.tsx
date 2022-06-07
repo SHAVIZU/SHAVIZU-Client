@@ -4,7 +4,7 @@ import { Logo } from "../../../assets";
 const Header = () => {
   return (
     <S.AuthHeader>
-      <img src={Logo} alt="" />
+      <img src={Logo} alt="" onClick={() => (window.location.href = "/main")} />
     </S.AuthHeader>
   );
 };

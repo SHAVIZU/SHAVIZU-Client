@@ -63,9 +63,11 @@ const RangeComponent = () => {
           <span>{rangeValue[1]}</span>
         </S.SettingSize>
       </S.Container>
-      <S.Container>
+      <S.FreeContainer>
+        <span>MIN</span>
         <S.SettingSize>free</S.SettingSize>
-      </S.Container>
+        <span>MAX</span>
+      </S.FreeContainer>
     </>
   );
 };
