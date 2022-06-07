@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/navermaps": "^3.0.16",
     "@types/react-rangeslider": "^2.2.4"
   }
 }
