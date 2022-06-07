@@ -5,3 +5,6 @@ export { default as SearchIcon } from "./searchIcon.svg";
 export { default as CloseIcon } from "./closeIcon.svg";
 export { default as SelectIcon } from "./selectIcon.svg";
 export { default as ArrowIcon } from "./arrowIcon.svg";
+export { default as mapSearchIcon } from "./mapSearchIcon.svg";
+export { default as mapCurrentLocationIcon } from "./mapCurrentLocationIcon.svg";
+export { default as mapCommentIcon } from "./mapCommentIcon.svg";
