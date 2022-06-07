@@ -59,6 +59,9 @@ export const Header = styled.div`
 `;
 export const AuthHeader = styled(Header)`
   border-bottom: none;
+  & img {
+    cursor: pointer;
+  }
 `;
 export const Category = styled.div`
   display: flex;
