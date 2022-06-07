@@ -57,7 +57,9 @@ export const Header = styled.div`
     }
   }
 `;
-
+export const AuthHeader = styled(Header)`
+  border-bottom: none;
+`;
 export const Category = styled.div`
   display: flex;
   gap: 48px;
@@ -204,7 +206,7 @@ export const SearchBar = styled.div`
     background-color: ${BackgroundColor};
     border: none;
     flex: 1;
-    :: placeholder {
+    ::placeholder {
       color: ${Lightgray};
     }
   }

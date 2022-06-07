@@ -13,10 +13,9 @@ export const getRequestWithToken = (
     timeout: 10000,
     headers: {
       Authorization: `Bearer ${token}`,
-      withCredentials: true,
+      CacheControl: 'no-cache'
     },
     responseType: type,
-    withCredentials: true,
   });
 
   return request;

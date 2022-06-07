@@ -17,7 +17,7 @@ const Login: FC = (): JSX.Element => {
       .then((res) => {
         localStorage.setItem("access_token", res.data.access_token);
         alert("로그인이 완료되었습니다.");
-        window.location.href = "/";
+        window.location.href = "/main";
       })
       .catch((err) => {
         alert("아이디 혹은 비밀번호를 확인해주세요");
