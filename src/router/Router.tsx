@@ -10,6 +10,7 @@ import {
   ShopProductsPage,
   ProductRegisterPage,
   AdminMainPage,
+  ShopMapPage,
 } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
@@ -24,6 +25,7 @@ const Router: FC = (): JSX.Element => {
         <Route path="/shop-products" element={<ShopProductsPage />} />
         <Route path="/product-re" element={<ProductRegisterPage />} />
         <Route path="/main" element={<AdminMainPage />} />
+        <Route path="/shop-map" element={<ShopMapPage />} />
       </Routes>
     </BrowserRouter>
   );
