@@ -26,11 +26,20 @@ export const Item = styled.div`
     font-size: 12px;
     font-weight: 400;
   }
-  span:nth-of-type(3) {
-    font-size: 12px;
-    font-weight: 400;
-    color: ${Lightgray};
-    margin-top: 2px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    > span {
+      font-size: 12px;
+      font-weight: 400;
+      color: ${Darkgray};
+      margin-top: 2px;
+    }
+    > span:nth-of-type(2) {
+      font-size: 12px;
+      font-weight: 400;
+      color: #ff6f69;
+    }
   }
 `;
 

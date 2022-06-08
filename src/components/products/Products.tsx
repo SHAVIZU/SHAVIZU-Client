@@ -1,24 +1,40 @@
 import React from "react";
+import Size from "./Size";
 import * as S from "./styles";
 
-const Products = () => {
+const Products = (product: any, isSearch: boolean) => {
+  const productInfo = product.product;
+
   return (
     <S.Product>
       <S.Item>
-        <img
-          src="https://cdn.jentestore.io/resource/products/412995/412995_1.jpg"
-          alt=""
-        />
-        <span>Raf Simons</span>
-        <span>라프 시몬스 X 스마일리 티셔츠</span>
-        <span>224M122</span>
+        <img src={productInfo.image_url} />
+        <span>{productInfo.brand_name}</span>
+        <span>{productInfo.item_name}</span>
+        {isSearch ? (
+          <div>
+            <span>{productInfo.style_code}</span>
+          </div>
+        ) : (
+          <div>
+            <span>{productInfo.discount_price}</span>
+            <span
+              style={productInfo.discount_rate === 0 ? { display: "none" } : {}}
+            >
+              {productInfo.discount_rate}%
+            </span>
+          </div>
+        )}
       </S.Item>
-      <S.Stock>
-        <S.Size>
-          <p>90</p>
-          <p>5</p>
-        </S.Size>
-      </S.Stock>
+      {isSearch ? (
+        <></>
+      ) : (
+        <S.Stock>
+          {productInfo.stock.map((size: any, index: any) => {
+            return <Size key={index} size={size} />;
+          })}
+        </S.Stock>
+      )}
     </S.Product>
   );
 };
