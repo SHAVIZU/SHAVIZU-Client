@@ -3,10 +3,11 @@ import { getTrackBackground, Range } from "react-range";
 import * as S from "./styles";
 const RangeComponent = () => {
   const [rangeValue, setRangeValue] = useState([50, 350]);
+  const [isFree, setIsFree] = useState(false);
   return (
     <>
-      <S.Container>
-        <S.SettingSize>
+      <S.Container isFree={isFree}>
+        <S.SettingSize isFree={isFree}>
           <span>{rangeValue[0]}</span>
         </S.SettingSize>
         <Range
@@ -59,14 +60,24 @@ const RangeComponent = () => {
             </div>
           )}
         />
-        <S.SettingSize>
+        <S.SettingSize isFree={isFree}>
           <span>{rangeValue[1]}</span>
         </S.SettingSize>
       </S.Container>
       <S.FreeContainer>
-        <span>MIN</span>
-        <S.SettingSize>free</S.SettingSize>
-        <span>MAX</span>
+        <span
+          style={isFree ? { visibility: "hidden" } : { visibility: "visible" }}
+        >
+          MIN
+        </span>
+        <S.SetFreeSize isFree={isFree} onClick={() => setIsFree(!isFree)}>
+          free
+        </S.SetFreeSize>
+        <span
+          style={isFree ? { visibility: "hidden" } : { visibility: "visible" }}
+        >
+          MAX
+        </span>
       </S.FreeContainer>
     </>
   );

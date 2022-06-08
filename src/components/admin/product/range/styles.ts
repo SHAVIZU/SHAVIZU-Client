@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
 
-export const Container = styled.div`
+export const Container = styled.div<{isFree?:boolean}>`
     width: 500px;
     height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    visibility: ${props=>props.isFree ? "hidden" : "visible"};
 `
 export const FreeContainer = styled(Container)`
     margin: 0;
@@ -29,5 +30,12 @@ export const SettingSize = styled(Container)`
     & span {
         color: black;
         height: 30px;
+        
     }
+`;
+export const SetFreeSize = styled(SettingSize)`
+    cursor:pointer;
+    visibility: visible;
+    border-color:${props=>props.isFree ? "black" : "#ccc"};
+    color: ${props=>props.isFree ? "black" : "#ccc"}
 `;
