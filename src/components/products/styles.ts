@@ -3,6 +3,7 @@ import { Darkgray, Lightgray } from "../../style/color";
 
 export const Product = styled.div`
   width: 244px;
+  /* height: 320px; */
   display: flex;
   gap: 8px;
 `;
@@ -11,7 +12,6 @@ export const Item = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-
   > img {
     width: 200px;
     height: 260px;
@@ -56,7 +56,7 @@ export const Stock = styled.div`
 `;
 
 export const Size = styled.div`
-  width: 36px;
+  min-width: 36px;
   height: 36px;
   padding: 2px 0;
   background-color: #fff;

@@ -1,11 +1,18 @@
 import React from "react";
 import * as S from "./styles";
 
-const Size = (size: any) => {
+type props = {
+  size: {
+    size: number | string;
+    amount: number | string;
+  };
+};
+
+const Size = ({ size }: props) => {
   return (
     <S.Size>
-      <p>{Object.keys(size.size)}</p>
-      <p>{Object.values(size.size)}</p>
+      <p>{size.size}</p>
+      <p>{size.amount}</p>
     </S.Size>
   );
 };

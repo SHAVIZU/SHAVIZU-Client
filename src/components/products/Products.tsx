@@ -1,27 +1,29 @@
 import React from "react";
 import Size from "./Size";
 import * as S from "./styles";
+type props = {
+  product: any;
+  isSearch: boolean;
+};
 
-const Products = (product: any, isSearch: boolean) => {
-  const productInfo = product.product;
-
+const Products = ({ product, isSearch }: props) => {
   return (
     <S.Product>
       <S.Item>
-        <img src={productInfo.image_url} />
-        <span>{productInfo.brand_name}</span>
-        <span>{productInfo.item_name}</span>
+        <img src={product.image_url} />
+        <span>{product.brand_name}</span>
+        <span>{product.item_name}</span>
         {isSearch ? (
           <div>
-            <span>{productInfo.style_code}</span>
+            <span>{product.style_code}</span>
           </div>
         ) : (
           <div>
-            <span>{productInfo.discount_price}</span>
+            <span>{product.discount_price}</span>
             <span
-              style={productInfo.discount_rate === 0 ? { display: "none" } : {}}
+              style={product.discount_rate === 0 ? { display: "none" } : {}}
             >
-              {productInfo.discount_rate}%
+              {product.discount_rate}%
             </span>
           </div>
         )}
@@ -30,7 +32,7 @@ const Products = (product: any, isSearch: boolean) => {
         <></>
       ) : (
         <S.Stock>
-          {productInfo.stock.map((size: any, index: any) => {
+          {product.inventories.map((size: any, index: any) => {
             return <Size key={index} size={size} />;
           })}
         </S.Stock>
