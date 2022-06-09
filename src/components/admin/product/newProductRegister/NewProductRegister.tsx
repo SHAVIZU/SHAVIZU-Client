@@ -27,12 +27,12 @@ const NewProductRegister = () => {
         <div>
           <S.Input placeholder="제품명" />
           <S.Input placeholder="스타일 코드" />
-          <S.Input
-            placeholder="브랜드"
-            readOnly
-            style={{ cursor: "pointer" }}
-          />
-          <S.Input placeholder="카테고리" />
+          <S.OptionInputContainer>
+            <span>브랜드</span>
+          </S.OptionInputContainer>
+          <S.OptionInputContainer>
+            <span>카테고리</span>
+          </S.OptionInputContainer>
           <RangeComponent />
           <S.Submit onClick={requestNewProductRegisterApi}>등록</S.Submit>
         </div>

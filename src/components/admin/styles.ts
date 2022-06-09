@@ -30,6 +30,21 @@ export const Input = styled.input`
     }
     display: block;
 `
+export const OptionInputContainer = styled.div`
+    width: 500px;
+    height: 50px;
+    background-color: white;
+    border-bottom: 1px solid black;
+    margin-top: 32px;
+    box-sizing:border-box;
+    padding-left: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    & span {
+        color: black;
+        line-height: 50px;
+    }
+`;
 export const PriceInputWrap = styled.div`
     width: 500px;
     display: flex;
