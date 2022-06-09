@@ -3,6 +3,7 @@ import { Darkgray, Lightgray } from "../../style/color";
 
 export const Product = styled.div`
   width: 244px;
+  /* height: 320px; */
   display: flex;
   gap: 8px;
 `;
@@ -11,7 +12,6 @@ export const Item = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-
   > img {
     width: 200px;
     height: 260px;
@@ -26,11 +26,20 @@ export const Item = styled.div`
     font-size: 12px;
     font-weight: 400;
   }
-  span:nth-of-type(3) {
-    font-size: 12px;
-    font-weight: 400;
-    color: ${Lightgray};
-    margin-top: 2px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    > span {
+      font-size: 12px;
+      font-weight: 400;
+      color: ${Darkgray};
+      margin-top: 2px;
+    }
+    > span:nth-of-type(2) {
+      font-size: 12px;
+      font-weight: 400;
+      color: #ff6f69;
+    }
   }
 `;
 
@@ -47,7 +56,7 @@ export const Stock = styled.div`
 `;
 
 export const Size = styled.div`
-  width: 36px;
+  min-width: 36px;
   height: 36px;
   padding: 2px 0;
   background-color: #fff;

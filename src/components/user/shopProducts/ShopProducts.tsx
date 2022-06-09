@@ -44,11 +44,69 @@ const ShopProducts: FC = (): JSX.Element => {
     return choese;
   };
 
+  const shopInfo = {
+    shop_name: "SHAVIZU",
+    items: [
+      {
+        discount_price: 120000,
+        discount_rate: 20,
+        item_name: "이건 옷이야12",
+        image_url: "https:/",
+        brand_name: "DSM",
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
+      },
+      {
+        discount_price: 120000,
+        discount_rate: 0,
+        item_name: "이건 옷이야34",
+        image_url: "https:/",
+        brand_name: "DSM",
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
+      },
+      {
+        discount_price: 120000,
+        discount_rate: 20,
+        item_name: "이건 옷이야12",
+        image_url: "https:/",
+        brand_name: "DSM",
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
+      },
+      {
+        discount_price: 120000,
+        discount_rate: 0,
+        item_name: "이건 옷이야34",
+        image_url: "https:/",
+        brand_name: "DSM",
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
       <Header></Header>
       <S.Container>
-        <S.ShopName>WORKSOUT</S.ShopName>
+        <S.ShopName>{shopInfo.shop_name}</S.ShopName>
         <div>
           <S.Topic>
             <div>
@@ -139,8 +197,8 @@ const ShopProducts: FC = (): JSX.Element => {
           </S.SelectFilter>
         </div>
         <S.ProductList>
-          {product.map((name, index) => {
-            return <Products key={index} />;
+          {shopInfo.items.map((item, index) => {
+            return <Products key={index} product={item} isSearch={false} />;
           })}
         </S.ProductList>
       </S.Container>

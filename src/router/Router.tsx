@@ -11,6 +11,7 @@ import {
   ProductRegisterPage,
   AdminMainPage,
   ShopMapPage,
+  ProductSearchPage,
 } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
@@ -26,6 +27,7 @@ const Router: FC = (): JSX.Element => {
         <Route path="/product-re" element={<ProductRegisterPage />} />
         <Route path="/main" element={<AdminMainPage />} />
         <Route path="/shop-map" element={<ShopMapPage />} />
+        <Route path="/search-product" element={<ProductSearchPage />} />
       </Routes>
     </BrowserRouter>
   );
