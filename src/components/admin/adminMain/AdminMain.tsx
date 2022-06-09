@@ -4,7 +4,7 @@ import * as ShopStyle from "../../user/shopProducts/styles";
 import Products from "../../products/Products";
 import { deleteUserRequest } from "../../../lib/api/deleteUser";
 const AdminMain = () => {
-  const product = ["a", "b"];
+  // const product = ["a", "b"];
   const requestDeleteUserApi = () => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -19,6 +19,35 @@ const AdminMain = () => {
         });
     }
   };
+  const product = [
+    {
+      discount_price: 120000,
+      discount_rate: 0,
+      item_name: "이건 옷이야34",
+      image_url: "https:/",
+      brand_name: "DSM",
+      inventories: [
+        {
+          size: "free",
+          amount: 5,
+        },
+      ],
+    },
+    {
+      discount_price: 120000,
+      discount_rate: 0,
+      item_name: "이건 옷이야34",
+      image_url: "https:/",
+      brand_name: "DSM",
+      inventories: [
+        {
+          size: "free",
+          amount: 5,
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <ShopStyle.Container>
@@ -30,8 +59,8 @@ const AdminMain = () => {
         </AdminStyle.TitleContainer>
         <AdminStyle.Line />
         <ShopStyle.ProductList>
-          {product.map((name, index) => {
-            return <Products key={index} />;
+          {product.map((item, index) => {
+            return <Products key={index} product={item} isSearch={false} />;
           })}
         </ShopStyle.ProductList>
       </ShopStyle.Container>

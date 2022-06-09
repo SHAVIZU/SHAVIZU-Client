@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Header from "../../header/Header";
 import { markerHtml } from "./markerHtml";
 import * as S from "./styles";
-import ShopItem from "./ShopItem";
+import ShopItem from "../../shopInfo/ShopInfo";
 import {
   mapSearchIcon,
   mapCurrentLocationIcon,
@@ -149,7 +149,7 @@ const ShopMap = () => {
         <S.List>
           <h1>Result</h1>
           {data.map((item) => (
-            <ShopItem key={item.id} shopInfo={item} />
+            <ShopItem key={item.id} shopInfo={item} isMap={true} />
           ))}
         </S.List>
       </S.Container>

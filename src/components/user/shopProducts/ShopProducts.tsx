@@ -53,7 +53,12 @@ const ShopProducts: FC = (): JSX.Element => {
         item_name: "이건 옷이야12",
         image_url: "https:/",
         brand_name: "DSM",
-        stock: [{ S: 15 }, { M: 80 }, { L: 100 }],
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
       },
       {
         discount_price: 120000,
@@ -61,7 +66,12 @@ const ShopProducts: FC = (): JSX.Element => {
         item_name: "이건 옷이야34",
         image_url: "https:/",
         brand_name: "DSM",
-        stock: [{ S: 15 }, { M: 80 }, { L: 100 }],
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
       },
       {
         discount_price: 120000,
@@ -69,7 +79,12 @@ const ShopProducts: FC = (): JSX.Element => {
         item_name: "이건 옷이야12",
         image_url: "https:/",
         brand_name: "DSM",
-        stock: [{ S: 15 }, { M: 80 }, { L: 100 }],
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
       },
       {
         discount_price: 120000,
@@ -77,7 +92,12 @@ const ShopProducts: FC = (): JSX.Element => {
         item_name: "이건 옷이야34",
         image_url: "https:/",
         brand_name: "DSM",
-        stock: [{ S: 15 }, { M: 80 }, { L: 100 }],
+        inventories: [
+          {
+            size: "free",
+            amount: 5,
+          },
+        ],
       },
     ],
   };
