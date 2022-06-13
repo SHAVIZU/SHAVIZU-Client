@@ -1,30 +1,34 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import * as S from "./styles";
 import Header from "../../header/Header";
 import { Logo } from "../../../assets";
 import PageMove from "./PageMove";
 import { getShopDetail } from "../../../lib/api/shopIntro";
+import { shopType } from "../../../lib/types/shopIntro";
 const ShopIntro: FC = (): JSX.Element => {
-  const data = {
-    name: "name",
-    address: "address",
-    telephone: "telephone",
-    opening_hours: "opening_hours",
-    description: "description",
-    images: ["url1", "url2", "url3", "url4"],
-  };
+  const [data, setData] = useState<shopType>({
+    name: "",
+    address: "",
+    telephone: "",
+    opening_hours: "",
+    description: "",
+    images: [],
+  });
+
+  const [shopId, setShopId] = useState<number | string>(0);
 
   const requestGetData = (id: number | string) => {
     getShopDetail(id)
-      .then((res) => {
-        console.log(res);
-        console.log("ressssssssssss");
+      .then((res: shopType) => {
+        setData(res);
       })
       .catch((err) => console.log(err));
   };
+
   useEffect(() => {
     let getId = window.location.search.split("=");
-    requestGetData(getId[1]);
+    setShopId(getId[1]);
+    requestGetData(shopId);
   }, []);
 
   return (
@@ -34,7 +38,7 @@ const ShopIntro: FC = (): JSX.Element => {
         <S.ShopInfo>
           <div>
             <h1>{data.name}</h1>
-            <PageMove />
+            <PageMove id={shopId} />
           </div>
           <S.ShopDetail>
             <span>매장위치 | {data.address}</span>
@@ -56,7 +60,7 @@ const ShopIntro: FC = (): JSX.Element => {
         <S.ShopInfo>
           <h1>WORKSOUT</h1>
           <span>{data.description}</span>
-          <PageMove />
+          <PageMove id={shopId} />
           <S.Logo>
             <img src={Logo} alt="" />
           </S.Logo>
