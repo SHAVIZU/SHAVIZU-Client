@@ -19,8 +19,8 @@ const ShopIntro: FC = (): JSX.Element => {
 
   const requestGetData = (id: number | string) => {
     getShopDetail(id)
-      .then((res: shopType) => {
-        setData(res);
+      .then((res) => {
+        setData(res.data);
       })
       .catch((err) => console.log(err));
   };
