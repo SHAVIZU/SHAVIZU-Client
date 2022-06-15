@@ -32,7 +32,7 @@ const Products = ({ product, isSearch }: props) => {
         <></>
       ) : (
         <S.Stock>
-          {product.inventories.map((size: any, index: any) => {
+          {product.inventories?.map((size: any, index: any) => {
             return <Size key={index} size={size} />;
           })}
         </S.Stock>

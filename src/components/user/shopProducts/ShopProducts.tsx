@@ -1,112 +1,120 @@
-import React, { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import * as S from "./styles";
 import Header from "../../header/Header";
 import Products from "../../products/Products";
 import { CloseIcon } from "../../../assets";
 import { MainColor, Darkgray } from "../../../style/color";
+import { shopProductsType } from "../../../lib/types/shopProducts";
+import { getShopProducts } from "../../../lib/api/shopProducts";
+import { getShopBrands } from "../../../lib/api/shopProducts/filterBrand";
+import { getShopSizes } from "../../../lib/api/shopProducts/filterSize";
+import { types } from "@babel/core";
 
 const ShopProducts: FC = (): JSX.Element => {
+  const [shopId, setShopId] = useState<number | string>(33);
+  const [choose, setChoose] = useState<string[]>([]);
+
+  const [shopInfo, setShopInfo] = useState<shopProductsType>();
   const [selectFilter, setSelectFilter] = useState<string[]>([]);
 
-  const product = ["a", "b", "c", "d", "e", "f", "g"];
+  const [topic, setTopic] = useState<string>("");
+  const [brand, setBrand] = useState<string[]>([]);
+  const [size, setSize] = useState<string[]>([]);
 
-  const [topic, setTopic] = useState("");
+  const [selectBrand, setSelectBrand] = useState<string[]>([]);
+  const [selectCategory, setSelectCategory] = useState<string[]>([]);
+  const [selectSize, setSelectSize] = useState<string[]>([]);
 
-  const [brand, setBrand] = useState(["adsf"]);
+  const category = {
+    상의: "TOP",
+    하의: "BOTTOM",
+    아우터: "OUTER",
+    "원피스/세트": "DRESS_SET",
+    풋웨어: "FOOT_WEAR",
+    헤드웨어: "HEAD_WEAR",
+    언더웨어: "UNDER_WEAR",
+    acc: "ACCESSORY",
+    etc: "ETC",
+  };
 
-  const [size, setSize] = useState(["size"]);
-
-  const category = [
-    "상의",
-    "하의",
-    "원피스/세트",
-    "풋웨어",
-    "헤드웨어",
-    "언더웨어",
-    "acc",
-    "기타",
-  ];
-
-  let choese: string[] = [];
-
-  const showFilter = () => {
-    if (topic === "brand") {
-      choese = brand;
-    } else if (topic === "category") {
-      choese = category;
-    } else if (topic === "size") {
-      if (selectFilter.filter((it) => category.includes(it)).length !== 0) {
-        choese = size;
-      } else {
-        choese = ["카테고리를 선택해주세요"];
-      }
+  const filterAssignment = (name: string) => {
+    switch (topic) {
+      case "brand":
+        setSelectBrand(selectBrand?.concat(name));
+        break;
+      case "category":
+        setSelectCategory(
+          selectCategory?.concat(category[name as keyof typeof category])
+        );
+        break;
+      case "size":
+        setSelectSize(selectSize?.concat(name));
+        break;
+      default:
+        console.log(topic);
     }
-    return choese;
   };
 
-  const shopInfo = {
-    shop_name: "SHAVIZU",
-    items: [
-      {
-        discount_price: 120000,
-        discount_rate: 20,
-        item_name: "이건 옷이야12",
-        image_url: "https:/",
-        brand_name: "DSM",
-        inventories: [
-          {
-            size: "free",
-            amount: 5,
-          },
-        ],
-      },
-      {
-        discount_price: 120000,
-        discount_rate: 0,
-        item_name: "이건 옷이야34",
-        image_url: "https:/",
-        brand_name: "DSM",
-        inventories: [
-          {
-            size: "free",
-            amount: 5,
-          },
-        ],
-      },
-      {
-        discount_price: 120000,
-        discount_rate: 20,
-        item_name: "이건 옷이야12",
-        image_url: "https:/",
-        brand_name: "DSM",
-        inventories: [
-          {
-            size: "free",
-            amount: 5,
-          },
-        ],
-      },
-      {
-        discount_price: 120000,
-        discount_rate: 0,
-        item_name: "이건 옷이야34",
-        image_url: "https:/",
-        brand_name: "DSM",
-        inventories: [
-          {
-            size: "free",
-            amount: 5,
-          },
-        ],
-      },
-    ],
+  const requestGetBrands = () => {
+    getShopBrands(shopId).then((res) => {
+      setBrand(res.data.brands);
+    });
   };
+
+  const requestGetShop = () => {
+    const brands = selectBrand.join(",");
+    const categorys = selectCategory.join(",");
+    const sizes = selectSize.join(",");
+
+    getShopProducts(shopId, brands, categorys, sizes)
+      .then((res) => {
+        setShopInfo(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    let getId = window.location.search.split("=");
+    setShopId(getId[1]);
+
+    requestGetShop();
+    requestGetBrands();
+  }, []);
+
+  useEffect(() => {
+    switch (topic) {
+      case "brand":
+        setChoose(brand);
+        break;
+      case "category":
+        setChoose(Object.keys(category));
+        break;
+      case "size":
+        if (
+          selectFilter.filter((it) => Object.keys(category).includes(it))
+            .length !== 0
+        )
+          setChoose(size);
+        else setChoose(["카테고리를 선택해주세요"]);
+        break;
+      default:
+        console.log(topic);
+    }
+  }, [topic]);
+
+  useEffect(() => {
+    getShopSizes(shopId, selectCategory)
+      .then((res) => {
+        setSize(res.data.sizes);
+      })
+      .catch((err) => console.log(err));
+  }, [selectCategory]);
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <S.Container>
-        <S.ShopName>{shopInfo.shop_name}</S.ShopName>
+        <S.ShopName>{shopInfo?.shop_name}</S.ShopName>
         <div>
           <S.Topic>
             <div>
@@ -114,6 +122,7 @@ const ShopProducts: FC = (): JSX.Element => {
                 onClick={() => {
                   setTopic(topic !== "brand" ? "brand" : "");
                 }}
+                style={topic === "brand" ? { color: "#55b6cd" } : {}}
               >
                 브랜드 {topic === "brand" ? "-" : "+"}
               </span>
@@ -121,6 +130,7 @@ const ShopProducts: FC = (): JSX.Element => {
                 onClick={() => {
                   setTopic(topic !== "category" ? "category" : "");
                 }}
+                style={topic === "category" ? { color: "#55b6cd" } : {}}
               >
                 카테고리 {topic === "category" ? "-" : "+"}
               </span>
@@ -128,6 +138,7 @@ const ShopProducts: FC = (): JSX.Element => {
                 onClick={() => {
                   setTopic(topic !== "size" ? "size" : "");
                 }}
+                style={topic === "size" ? { color: "#55b6cd" } : {}}
               >
                 사이즈 {topic === "size" ? "-" : "+"}
               </span>
@@ -142,42 +153,47 @@ const ShopProducts: FC = (): JSX.Element => {
               </span>
               <span
                 onClick={() => {
-                  console.log("api 호출");
+                  requestGetShop();
                 }}
               >
                 적용
               </span>
             </div>
           </S.Topic>
-          <S.Filter
-            style={topic === "" ? { display: "none" } : { display: "grid" }}
-          >
-            {showFilter().map((name, index) => {
-              return (
-                <span
-                  key={index}
-                  style={
-                    selectFilter.includes(name)
-                      ? { color: MainColor }
-                      : { color: Darkgray }
-                  }
-                  onClick={() => {
-                    if (name === "카테고리를 선택해주세요") {
-                      return;
-                    } else if (selectFilter.includes(name)) {
-                      setSelectFilter(
-                        selectFilter.filter((element) => element !== name)
-                      );
-                    } else {
-                      setSelectFilter([...selectFilter, name]);
+          {topic && (
+            <S.Filter>
+              {choose?.map((name, index) => {
+                return (
+                  <span
+                    key={index}
+                    style={
+                      selectFilter.includes(name)
+                        ? { color: MainColor }
+                        : { color: Darkgray }
                     }
-                  }}
-                >
-                  {name}
-                </span>
-              );
-            })}
-          </S.Filter>
+                    onClick={() => {
+                      if (name === "카테고리를 선택해주세요") {
+                        return;
+                      } else if (selectFilter.includes(name)) {
+                        setSelectFilter(
+                          selectFilter.filter((element) => element !== name)
+                        );
+                        setSelectCategory(
+                          selectCategory?.filter((item) => item !== name)
+                        );
+                      } else {
+                        setSelectFilter([...selectFilter, name]);
+                        filterAssignment(name);
+                      }
+                    }}
+                  >
+                    {name}
+                  </span>
+                );
+              })}
+            </S.Filter>
+          )}
+
           <S.SelectFilter>
             {selectFilter.map((name, index) => {
               return (
@@ -197,9 +213,14 @@ const ShopProducts: FC = (): JSX.Element => {
           </S.SelectFilter>
         </div>
         <S.ProductList>
-          {shopInfo.items.map((item, index) => {
-            return <Products key={index} product={item} isSearch={false} />;
-          })}
+          {shopInfo ? (
+            shopInfo.items &&
+            shopInfo.items.map((item: object, index: number) => {
+              return <Products key={index} product={item} isSearch={false} />;
+            })
+          ) : (
+            <p>제품이 존재하지 않습니다.</p>
+          )}
         </S.ProductList>
       </S.Container>
     </>
