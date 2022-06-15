@@ -9,7 +9,12 @@ type props = {
 
 const ShopItem = ({ shopInfo, isMap }: props) => {
   return (
-    <S.Shop>
+    <S.Shop
+      onClick={(e: any) => {
+        window.location.href =
+          "http://localhost:3000/shop-intro?=" + shopInfo.id;
+      }}
+    >
       <img src={shopInfo.image_url} />
       <h1>{shopInfo.name}</h1>
       <div>
