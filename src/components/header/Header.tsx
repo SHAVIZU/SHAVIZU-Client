@@ -9,25 +9,69 @@ import {
   SelectIcon,
 } from "../../assets";
 const Header: FC = (): JSX.Element => {
-  const topic = ["스타일 코드", "제품 이름", "브랜드"];
-  const filter = ["상의", "하의", "아우터", "풋웨어", "아이웨어"];
+  const topic = {
+    "스타일 코드": "style_code",
+    "제품 이름": "name",
+    브랜드: "brand",
+  };
+  const filter = {
+    상의: "TOP",
+    하의: "BOTTOM",
+    아우터: "OUTER",
+    "원피스/세트": "DRESS_SET",
+    풋웨어: "FOOT_WEAR",
+    헤드웨어: "HEAD_WEAR",
+    언더웨어: "UNDER_WEAR",
+    acc: "ACCESSORY",
+    etc: "ETC",
+  };
 
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const [searchTopic, setSearchTopic] = useState("도로명 주소");
+  const [searchTopicDiscript, setSearchTopicDiscript] = useState("도로명 주소");
   const [searchValue, setSearchValue] = useState("");
+  const [searchTopic, setSearchTopic] = useState("style_code");
+  const [selectCategory, setSelectCategory] = useState<string[]>([]);
 
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const settingSelect = (input: any, ele: any) => {
+    if (input.checked) {
+      setSelectCategory([
+        ...selectCategory,
+        filter[ele as keyof typeof filter],
+      ]);
+    } else {
+      setSelectCategory(
+        selectCategory.filter(
+          (category) => category !== filter[ele as keyof typeof filter]
+        )
+      );
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    console.log(token);
     if (token !== null) {
       setIsAdmin(true);
     } else {
       setIsAdmin(false);
     }
   }, []);
+
+  const enterKey = () => {
+    if (searchValue === "") {
+      alert("검색어를 입력해주세요!");
+    } else {
+      window.location.href =
+        "/search-product?topic=" +
+        searchTopic +
+        "&search=" +
+        searchValue +
+        "&categoty=" +
+        selectCategory;
+    }
+  };
 
   return (
     <S.Header>
@@ -46,7 +90,7 @@ const Header: FC = (): JSX.Element => {
             defaultChecked={!isOpenCategory}
             onClick={() => {
               setIsOpenCategory(false);
-              setSearchTopic("도로명 주소");
+              setSearchTopicDiscript("도로명 주소");
             }}
           />
         </S.SelectFilter>
@@ -63,7 +107,7 @@ const Header: FC = (): JSX.Element => {
             defaultChecked={isOpenCategory}
             onChange={() => {
               setIsOpenCategory(true);
-              setSearchTopic("스타일 코드");
+              setSearchTopicDiscript("스타일 코드");
             }}
           />
         </S.SelectFilter>
@@ -85,15 +129,17 @@ const Header: FC = (): JSX.Element => {
           }}
         >
           <div>
-            {topic.map((ele, index) => {
+            {Object.keys(topic).map((ele, index) => {
               return (
                 <S.ItemCategorySelect key={index}>
                   <input
                     type="radio"
-                    name="topic"
                     id={ele}
-                    checked={ele === searchTopic}
-                    onClick={() => setSearchTopic(ele)}
+                    checked={ele === searchTopicDiscript}
+                    onClick={() => {
+                      setSearchTopicDiscript(ele);
+                      setSearchTopic(topic[ele as keyof typeof topic]);
+                    }}
                     readOnly
                   />
                   <label htmlFor={ele}>{ele}</label>
@@ -103,10 +149,18 @@ const Header: FC = (): JSX.Element => {
           </div>
           <hr />
           <div>
-            {filter.map((ele, index) => {
+            {Object.keys(filter).map((ele: string, index) => {
               return (
                 <S.ItemCategorySelect key={index}>
-                  <input type="checkbox" name={ele} id={ele} readOnly />
+                  <input
+                    type="checkbox"
+                    name={ele}
+                    // id={filter.[ele]}
+                    onChange={(e: any) => {
+                      settingSelect(e.target, ele);
+                    }}
+                    readOnly
+                  />
                   <label htmlFor="">{ele}</label>
                 </S.ItemCategorySelect>
               );
@@ -122,10 +176,15 @@ const Header: FC = (): JSX.Element => {
           type="search"
           name=""
           id="search"
-          placeholder={searchTopic}
+          placeholder={searchTopicDiscript}
           value={searchValue}
           onChange={(e) => {
             setSearchValue(e.target.value);
+          }}
+          onKeyUpCapture={(e) => {
+            if (e.keyCode == 13) {
+              enterKey();
+            }
           }}
         />
         <img src={CloseIcon} alt="" onClick={() => setSearchValue("")} />

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://13.125.216.132/";
+axios.defaults.baseURL = "http://43.200.23.119:80/";
 export const request = axios.create({
   timeout: 10000,
 });
@@ -24,7 +24,6 @@ export const getRequestWithToken = (
 export const getRequest = (type: "json" | "blob" | "text" = "json") => {
   const request = axios.create({
     timeout: 10000,
-    url: '3.38.45.97:80',
     headers: {},
     responseType: type,
   });
