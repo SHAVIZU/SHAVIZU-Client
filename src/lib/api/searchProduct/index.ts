@@ -7,14 +7,14 @@ export const getSearchProduct = async (
 ) => {
   try {
     const request = getRequest();
-    const req = await request.get(
+    const productReq = await request.get(
       "/search/item?" +
         `${topic === "style_code" ? `style_code=${inputValue}` : ""}` +
         `${topic === "name" ? `name=${inputValue}` : ""}` +
         `${topic === "brand" ? `brand=${inputValue}` : ""}` +
         `${category === "" ? "" : `categoty=${category}`}`
     );
-    return req;
+    return productReq;
   } catch (err: any) {
     return Promise.reject(err);
   }
