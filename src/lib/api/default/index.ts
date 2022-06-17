@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://43.200.23.119:80/";
+axios.defaults.baseURL = "http://13.125.216.132/";
 export const request = axios.create({
   timeout: 10000,
 });
