@@ -30,6 +30,10 @@ export const Topic = styled.div`
       padding: 0 20px;
       font-size: 16px;
       cursor: pointer;
+      transition: 0.5s;
+      :hover {
+        color: ${MainColor};
+      }
     }
   }
 
@@ -68,6 +72,7 @@ export const SelectFilter = styled.div`
   width: 100%;
   overflow-x: scroll;
   gap: 8px;
+  flex-wrap: wrap;
 
   ::-webkit-scrollbar {
     display: none;
