@@ -19,3 +19,13 @@ export const getSearchProduct = async (
     return Promise.reject(err);
   }
 };
+
+export const getSearchProductDetail = async (id: number) => {
+  try {
+    const request = getRequest();
+    const shopReq = await request.get("/search/item/detail?item_id=" + id);
+    return shopReq;
+  } catch (err: any) {
+    return Promise.reject(err);
+  }
+};

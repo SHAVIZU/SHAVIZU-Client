@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import Size from "../products/Size";
 import * as S from "./styles";
 
@@ -21,13 +21,11 @@ const ShopItem = ({ shopInfo, isMap }: props) => {
         <span>{shopInfo.opening_hours}</span>
         <span> | {shopInfo.address}</span>
       </div>
-      <div></div>
-
       {isMap ? (
         <></>
       ) : (
         <S.Stock>
-          {shopInfo.inventories.map((size: any, index: any) => {
+          {shopInfo?.inventory?.map((size: any, index: any) => {
             return <Size key={index} size={size} />;
           })}
         </S.Stock>
