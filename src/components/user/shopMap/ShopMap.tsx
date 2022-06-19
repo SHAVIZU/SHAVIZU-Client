@@ -1,6 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Header from "../../header/Header";
-import { markerHtml } from "./markerHtml";
+import {
+  currentLocation,
+  markerHtml,
+  clickMarkerHtml,
+  explanationShop,
+} from "./markerHtml";
 import * as S from "./styles";
 import ShopItem from "../../shopInfo/ShopInfo";
 import {
@@ -8,12 +13,57 @@ import {
   mapCurrentLocationIcon,
   mapCommentIcon,
 } from "../../../assets";
+import { getSearchShop } from "../../../lib/api/searchMap";
+
+type shopLoc = {
+  lat: number;
+  long: number;
+};
+
+type shopInfo = {
+  id: number;
+  name: string;
+  image_url: string;
+  opening_hours: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+};
 
 const ShopMap = () => {
-  const [myLocation, setMyLocation] = useState<
-    { latitude: number; longitude: number } | string
-  >("");
-  const [myMap, setMyMap] = useState<any>();
+  const [shopsInfo, setShopsInfo] = useState<shopInfo[]>([]);
+  const [shopsLocation, setShopsLocation] = useState<shopLoc[]>([]);
+  const [myLocation, setMyLocation] = useState<any>("");
+
+  const mapRef = useRef<HTMLElement | null | any>(null);
+
+  const searchCurrentMap = () => {
+    const currentMap = mapRef.current.getBounds();
+
+    getSearchShop(
+      currentMap._max._lat,
+      currentMap._max._lng,
+      currentMap._min._lat,
+      currentMap._min._lng
+    )
+      .then((res) => {
+        setShopsInfo(res.data);
+        console.log(res.data);
+
+        res.data.map((info: any, index: any) => {
+          setShopsLocation(
+            shopsLocation.concat({ lat: info?.latitude, long: info?.longitude })
+          );
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const moveCurrentMap = () => {
+    mapRef.current.panTo(
+      new naver.maps.LatLng(myLocation.latitude, myLocation.longitude)
+    );
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -25,11 +75,6 @@ const ShopMap = () => {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-
-      setMyMap({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
     }
 
     function error() {
@@ -37,84 +82,107 @@ const ShopMap = () => {
     }
   }, []);
 
-  const mapRef = useRef<HTMLElement | null | any>(null);
-
   useEffect(() => {
-    if (typeof myLocation !== "string")
+    if (typeof myLocation !== "string") {
+      const currentPosition = [myLocation.latitude, myLocation.longitude];
+
       mapRef.current = new naver.maps.Map("map", {
-        center: new naver.maps.LatLng(
-          myLocation.latitude,
-          myLocation.longitude
-        ),
+        center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
         zoomControl: false,
       });
-  }, [mapRef, myLocation]);
 
-  const data = [
-    {
-      id: 1,
-      name: "윤준기팀",
-      image_url: "https://shavizu.s3.ap-northeast-2.amazonaws.com/",
-      opening_hours: "8:20 AM - 8:30 PM",
-      address: "대덕소프트웨어마이스터고등학교",
-      latitude: 36.3504119,
-      longitude: 127.3845475,
-    },
-    {
-      id: 2,
-      name: "소공",
-      image_url: "https://shavizu.s3.ap-northeast-2.amazonaws.com/",
-      opening_hours: "8:20 AM - 8:30 PM",
-      address: "대덕대학교 정곡관",
-      latitude: 36.3504119,
-      longitude: 127.3845475,
-    },
-    {
-      id: 3,
-      name: "샤비쥬",
-      image_url: "https://shavizu.s3.ap-northeast-2.amazonaws.com/",
-      opening_hours: "8:20 AM - 8:30 PM",
-      address: "대덕대학교 이공관",
-      latitude: 36.3504119,
-      longitude: 127.3845475,
-    },
-  ];
-
-  const markerRef = useRef<any | null>(null);
+      const currentMarker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
+        map: mapRef.current,
+        icon: {
+          content: [currentLocation()].join(""),
+        },
+      });
+    }
+  }, [myLocation]);
 
   useEffect(() => {
-    markerRef.current = new naver.maps.Marker({
-      position: new naver.maps.LatLng(36.3904673, 127.3713544),
-      map: mapRef.current,
-      icon: {
-        content: [markerHtml()].join(""),
-        anchor: new naver.maps.Point(11, 11),
-      },
-    });
-  }, []);
+    if (typeof myLocation !== "string") {
+      const markers: naver.maps.Marker[] = [];
+      const infowindows: naver.maps.InfoWindow[] = [];
 
-  const searchCurrentMap = () => {
-    const currentMap = mapRef.current.getBounds();
-    console.log(
-      currentMap._max._lat +
-        " // " +
-        currentMap._max._lng +
-        " // " +
-        currentMap._min._lat +
-        " // " +
-        currentMap._min._lng +
-        " // "
-    );
-  };
+      for (let i = 0; i < shopsLocation.length; i += 1) {
+        const otherMarkers = new naver.maps.Marker({
+          position: new naver.maps.LatLng(
+            shopsLocation[i].lat,
+            shopsLocation[i].long
+          ),
+          map: mapRef.current,
+          icon: {
+            content: [markerHtml()].join(""),
+          },
+        });
 
-  const moveCurrentMap = () => {
-    mapRef.current.panTo(
-      new naver.maps.LatLng(myMap.latitude, myMap.longitude)
-    );
+        const infowindow = new naver.maps.InfoWindow({
+          content: [explanationShop(shopsInfo[i])].join(""),
+          borderColor: "#fff",
+        });
 
-    searchCurrentMap();
-  };
+        markers.push(otherMarkers);
+        infowindows.push(infowindow);
+      }
 
+      naver.maps.Event.addListener(mapRef.current, "idle", () => {
+        updateMarkers(mapRef.current, markers);
+      });
+
+      const updateMarkers = (
+        isMap: naver.maps.Map,
+        isMarkers: naver.maps.Marker[]
+      ) => {
+        const mapBounds: any = isMap.getBounds();
+        let marker;
+        let position;
+
+        for (let i = 0; i < isMarkers.length; i += 1) {
+          marker = isMarkers[i];
+          position = marker.getPosition();
+
+          if (mapBounds.hasLatLng(position)) {
+            showMarker(isMap, marker);
+          } else {
+            hideMarker(marker);
+          }
+        }
+      };
+
+      const showMarker = (isMap: naver.maps.Map, marker: naver.maps.Marker) => {
+        marker.setMap(isMap);
+      };
+
+      const hideMarker = (marker: naver.maps.Marker) => {
+        marker.setMap(null);
+      };
+
+      const getClickHandler = (seq: number) => {
+        return () => {
+          const infoWindow = infowindows[seq];
+
+          if (infoWindow.getMap()) {
+            infoWindow.close();
+
+            markers[seq].setIcon({
+              content: [markerHtml()].join(""),
+            });
+          } else {
+            infoWindow.open(mapRef.current, markers[seq]);
+            markers[seq].setIcon({
+              content: [clickMarkerHtml()].join(""),
+            });
+          }
+        };
+      };
+
+      for (let i = 0; i < markers.length; i += 1) {
+        naver.maps.Event.addListener(markers[i], "click", getClickHandler(i));
+      }
+    }
+  }, [myLocation, shopsLocation]);
   return (
     <>
       <Header />
@@ -147,10 +215,16 @@ const ShopMap = () => {
           </S.MapMore>
         </div>
         <S.List>
-          <h1>Result</h1>
-          {data.map((item) => (
-            <ShopItem key={item.id} shopInfo={item} isMap={true} />
-          ))}
+          {shopsInfo.length === 0 ? (
+            <h1>해당 맵에 편집샵이 존재하지 않습니다 T.T</h1>
+          ) : (
+            <>
+              <h1>Result</h1>
+              {shopsInfo.map((item: shopInfo) => (
+                <ShopItem key={item.id} shopInfo={item} isMap={true} />
+              ))}
+            </>
+          )}
         </S.List>
       </S.Container>
     </>

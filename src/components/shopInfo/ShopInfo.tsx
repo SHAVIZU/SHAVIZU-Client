@@ -12,7 +12,7 @@ const ShopItem = ({ shopInfo, isMap }: props) => {
     <S.Shop
       onClick={(e: any) => {
         window.location.href =
-          "http://localhost:3000/shop-intro?=" + shopInfo.id;
+          "http://localhost:3000/shop-intro?id=" + shopInfo.id;
       }}
     >
       <img src={shopInfo.image_url} />

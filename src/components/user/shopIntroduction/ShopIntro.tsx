@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, ReactNode, useEffect, useState } from "react";
 import * as S from "./styles";
 import Header from "../../header/Header";
 import { Logo } from "../../../assets";
 import PageMove from "./PageMove";
 import { getShopDetail } from "../../../lib/api/shopIntro";
 import { shopType } from "../../../lib/types/shopIntro";
+import { useLocation } from "react-router";
+
 const ShopIntro: FC = (): JSX.Element => {
   const [data, setData] = useState<shopType>({
     name: "",
@@ -15,7 +17,9 @@ const ShopIntro: FC = (): JSX.Element => {
     images: [],
   });
 
-  const [shopId, setShopId] = useState<number | string>(0);
+  const location = useLocation();
+
+  const [shopId, setShopId] = useState<number>(0);
 
   const requestGetData = (id: number | string) => {
     getShopDetail(id)
@@ -26,10 +30,16 @@ const ShopIntro: FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    let getId = window.location.search.split("=");
-    setShopId(getId[1]);
-    requestGetData(shopId);
-  }, []);
+    const prams = new URLSearchParams(location.search).get("id");
+
+    if (Number(prams) === 0) {
+      console.log(prams);
+      return;
+    } else {
+      setShopId(Number(prams));
+      requestGetData(Number(prams));
+    }
+  }, [location]);
 
   return (
     <>
