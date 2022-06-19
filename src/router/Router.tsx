@@ -12,11 +12,13 @@ import {
   AdminMainPage,
   ShopMapPage,
   ProductSearchPage,
+  LandingPage,
 } from "../pages";
 const Router: FC = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/change-pw" element={<ChangePwPage />} />
         <Route path="/signup" element={<SignupPage />} />

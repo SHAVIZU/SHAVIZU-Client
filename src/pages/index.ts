@@ -9,3 +9,4 @@ export { default as ProductRegisterPage } from "./product/productRegister/Produc
 export { default as AdminMainPage } from "./adminMain/AdminMainPage";
 export { default as ShopMapPage } from "./user/shopMap/ShopMapPage";
 export { default as ProductSearchPage } from "./user/productSearch/ProductSearchPage";
+export { default as LandingPage } from "./landing/LandingPage";

@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { Darkgray, MainColor } from "../../style/color";
 
 export const Shop = styled.div`
-  /* width: 528px; */
   width: 100%;
 
   > img {

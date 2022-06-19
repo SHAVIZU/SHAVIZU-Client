@@ -8,3 +8,5 @@ export { default as ArrowIcon } from "./arrowIcon.svg";
 export { default as mapSearchIcon } from "./mapSearchIcon.svg";
 export { default as mapCurrentLocationIcon } from "./mapCurrentLocationIcon.svg";
 export { default as mapCommentIcon } from "./mapCommentIcon.svg";
+export { default as LandingImg } from "./landingImg.svg";
+export { default as EmptyLogo } from "./emptyLogo.svg";
