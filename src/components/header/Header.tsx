@@ -91,6 +91,7 @@ const Header: FC = (): JSX.Element => {
             onClick={() => {
               setIsOpenCategory(false);
               setSearchTopicDiscript("도로명 주소");
+              window.location.href = "/search-shop";
             }}
           />
         </S.SelectFilter>
@@ -168,7 +169,7 @@ const Header: FC = (): JSX.Element => {
           </div>
         </S.ItemCategoryBox>
       </S.ItemCategory>
-      <S.SearchBar>
+      <S.SearchBar style={isOpenCategory ? {} : { display: "none" }}>
         <label htmlFor="search">
           <img src={SearchIcon} alt="" />
         </label>
