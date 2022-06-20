@@ -1,4 +1,4 @@
-import { request } from "../default";
+import { request } from "../default/index";
 
 export const signupRequest = async (
   user_id: string,

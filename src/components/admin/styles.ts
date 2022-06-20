@@ -40,20 +40,68 @@ export const OptionInputContainer = styled.div`
     border-bottom: 1px solid black;
     margin-top: 32px;
     box-sizing:border-box;
-    padding:  0 10px;
+    padding: 0 20px;
     font-size: 16px;
-    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     & span {
         color: black;
         line-height: 50px;
+        margin: 0;
+    }
+`;
+export const ChoiceInputContainer = styled(OptionInputContainer)`
+    cursor: pointer;
+    justify-content: flex-start;
+    & span{
+        z-index: 0;
+    }
+
+`;
+export const BrandContainer = styled.div`
+    width: 500px;
+    height: 50px;
+`;
+export const BrandSearchContainer = styled.div<{zIndex: number}>`
+    width: 500px;
+    height: 60px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: ${props=>props.zIndex};
+`;
+export const CategoryContainer= styled(BrandSearchContainer)`
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    overflow-x: visible;
+    & span{
+        color: black;
+    }
+`;
+export const BrandSearchInput = styled.input`
+    width: 95%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-left: 10px;
+`;
+export const StyleCodeInput = styled.input`
+    border: none;
+    outline: none;
+    width: 80%;
+    height: 100%;
+    color: black;
+    font-size: 16px;
+    ::placeholder{
+        color: black;
     }
 `;
 export const PriceInputContainer = styled(OptionInputContainer)`
     cursor: default;
     width: 240px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    
     & span {
         margin: 0;
     }
@@ -62,15 +110,13 @@ export const PriceInputWrap = styled.div`
     width: 500px;
     display: flex;
     justify-content: space-between;
-    
-
 `;
 export const PriceInput = styled.input`
     outline: none;
     border: none;
     text-align: right;
     font-size: 16px;
-    width: 150px;
+    width: 135px;
     ::-webkit-inner-spin-button{
     -webkit-appearance: none; 
     margin: 0; 
@@ -135,7 +181,11 @@ export const ProductImg = styled.div<{is_url?: boolean}>`
     font-size: 20px;
     display: ${props=>props.is_url ? "none" : "flex"};
     flex-direction: column;
+    justify-content: center;
 `
+export const ProductImgWrap = styled(ProductImg)`
+    justify-content: flex-start;
+`;
 export const SearchWrap = styled.div`
     display: flex;
     align-items: center;
@@ -261,5 +311,6 @@ export const InputBtn = styled.div`
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    line-height: 25px;
+    line-height: 30px;
+    text-align: center;
 `;
