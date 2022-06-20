@@ -24,7 +24,7 @@ export const getRequestWithToken = (
 export const getRequest = (type: "json" | "blob" | "text" = "json") => {
   const request = axios.create({
     timeout: 10000,
-    url: '3.38.45.97:80',
+    baseURL: 'http://43.200.23.119:80',
     headers: {},
     responseType: type,
   });

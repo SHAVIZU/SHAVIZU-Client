@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getItemInfoRequest } from "../../../../lib/api/getProductInfo";
-import { searchStyleCodeRequest } from "../../../../lib/api/searchStyleCode";
+import { getStyleCodeRequest } from "../../../../lib/api/getStyleCode";
 import * as S from "../../styles";
 import StockList from "../stockList/StockList";
 const ProductRegister = () => {
@@ -20,7 +20,7 @@ const ProductRegister = () => {
   const sizeArr = [90, 95, 100, 105, 110];
   const requestSearchStyleCode = () => {
     if (token) {
-      searchStyleCodeRequest(token, styleCode)
+      getStyleCodeRequest(token, styleCode)
         .then((res) => {
           const data = res.data.items;
           if (data.length === 0) {
@@ -63,7 +63,7 @@ const ProductRegister = () => {
             style={{ width: "400px", height: "520px" }}
           />
         )}
-        <S.ProductImg is_url={imgurl ? true : false}>
+        <S.ProductImgWrap is_url={imgurl ? true : false}>
           <S.SearchWrap>
             <S.SearchStyleCodeInput
               placeholder="스타일코드 입력"
@@ -85,7 +85,7 @@ const ProductRegister = () => {
           >
             새로운 제품 등록
           </S.StyleCode>
-        </S.ProductImg>
+        </S.ProductImgWrap>
         <S.ProductInfoWrap>
           <S.PriceInputWrap>
             <S.PriceInputContainer>
