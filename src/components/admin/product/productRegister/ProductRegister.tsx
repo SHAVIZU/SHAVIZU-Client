@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { getItemInfoRequest } from "../../../../lib/api/getProductInfo";
 import { getStyleCodeRequest } from "../../../../lib/api/getStyleCode";
+import { sellItemRegisterRequest } from "../../../../lib/api/sellItemRegister";
 import * as S from "../../styles";
-import StockList from "../stockList/StockList";
+type size = {
+  id?: number;
+  size?: number;
+  amount: number;
+  item_size_id?: number;
+};
 const ProductRegister = () => {
   const token = localStorage.getItem("access_token");
   const [styleCodeArr, setStyleCodeArr] = useState<string[]>([]);
+  const [id, setId] = useState<number>(0);
   const [idArr, setIdArr] = useState<number[]>([]);
   const [imgurl, setImgurl] = useState<string>("");
   const [inputs, setInputs] = useState({ styleCode: "", price: 0, sale: 0 });
   const { styleCode, price, sale } = inputs;
+  const [sizeArr, setSizeArr] = useState<size[]>([]);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setInputs({
@@ -17,7 +25,6 @@ const ProductRegister = () => {
       [name]: value,
     });
   };
-  const sizeArr = [90, 95, 100, 105, 110];
   const requestSearchStyleCode = () => {
     if (token) {
       getStyleCodeRequest(token, styleCode)
@@ -45,11 +52,37 @@ const ProductRegister = () => {
       getItemInfoRequest(token, id)
         .then((res) => {
           setImgurl(res.data.image_url);
-          console.log(res.data.image_url);
+          let arr = res.data.size;
+          arr.map((i: any) => (i.amount = 0));
+          setSizeArr(arr);
+          setId(id);
         })
         .catch(() => {
           alert("문제가 발생하였습니다.");
         });
+    }
+  };
+  const requestSellItemRegister = () => {
+    let arr = sizeArr;
+    arr.forEach((i) => {
+      delete i.size;
+      i.item_size_id = i.id;
+      delete i.id;
+    });
+    const item = {
+      sell: {
+        price: Number(price),
+        discount_rate: Number(sale),
+      },
+      item: arr,
+    };
+    if (token) {
+      sellItemRegisterRequest(token, id, item)
+        .then(() => {
+          alert("제품 등록이 완료되었습니다.");
+          window.location.href = "/main";
+        })
+        .catch((err) => alert("문제가 발생하였습니다."));
     }
   };
   return (
@@ -111,10 +144,36 @@ const ProductRegister = () => {
           </S.PriceInputWrap>
           <S.StockListWrap>
             {sizeArr.map((index, i) => (
-              <StockList size={index} key={i} />
+              <S.StockListContainer key={i}>
+                <S.StockListItem>
+                  <h5>{index.size}</h5>
+                  <span>{index.amount + "개"}</span>
+                </S.StockListItem>
+                <S.StockChangeWrap>
+                  <S.StockChangeItem
+                    onClick={() => {
+                      let arr = sizeArr;
+                      if (arr[i].amount >= 0) {
+                        arr[i].amount += 1;
+                        setSizeArr([...arr]);
+                      }
+                    }}
+                  />
+                  <span>재고</span>
+                  <S.StockChangeItem
+                    onClick={() => {
+                      let arr = sizeArr;
+                      if (arr[i].amount > 0) {
+                        arr[i].amount -= 1;
+                        setSizeArr([...arr]);
+                      }
+                    }}
+                  />
+                </S.StockChangeWrap>
+              </S.StockListContainer>
             ))}
           </S.StockListWrap>
-          <S.Submit>등록</S.Submit>
+          <S.Submit onClick={() => requestSellItemRegister()}>등록</S.Submit>
         </S.ProductInfoWrap>
       </S.ProductBox>
     </S.Container>
