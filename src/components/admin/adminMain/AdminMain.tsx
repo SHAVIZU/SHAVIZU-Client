@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as AdminStyle from "./styles";
 import * as ShopStyle from "../../user/shopProducts/styles";
 import Products from "../../products/Products";
 import { deleteUserRequest } from "../../../lib/api/deleteUser";
+import { getMyShopsItem } from "../../../lib/api/getMyShopsItem";
 const AdminMain = () => {
-  // const product = ["a", "b"];
+  const token = localStorage.getItem("access_token");
   const requestDeleteUserApi = () => {
     const token = localStorage.getItem("access_token");
     if (token) {
@@ -19,34 +20,12 @@ const AdminMain = () => {
         });
     }
   };
-  const product = [
-    {
-      discount_price: 120000,
-      discount_rate: 0,
-      item_name: "이건 옷이야34",
-      image_url: "https:/",
-      brand_name: "DSM",
-      inventories: [
-        {
-          size: "free",
-          amount: 5,
-        },
-      ],
-    },
-    {
-      discount_price: 120000,
-      discount_rate: 0,
-      item_name: "이건 옷이야34",
-      image_url: "https:/",
-      brand_name: "DSM",
-      inventories: [
-        {
-          size: "free",
-          amount: 5,
-        },
-      ],
-    },
-  ];
+  const [product, setProduct] = useState<any[]>([]);
+  useEffect(() => {
+    if (token) {
+      getMyShopsItem(token).then((res) => setProduct(res.data.sells));
+    }
+  });
 
   return (
     <>
