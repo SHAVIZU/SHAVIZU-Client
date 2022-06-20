@@ -118,6 +118,7 @@ export const ItemCategory = styled.div`
 `;
 
 export const ItemCategoryBox = styled.div`
+  z-index: 100;
   position: absolute;
   padding: 20px;
   left: 660px;

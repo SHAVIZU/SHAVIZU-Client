@@ -8,6 +8,9 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
 `
+export const SignupContainer = styled(Container)`
+    height: 180vh;
+`;
 export const Title = styled.h1`
     font-weight: 700;
     font-size: 36px;
@@ -269,7 +272,31 @@ export const StockChangeItem = styled.div`
     height: 24px;
     border: 1px solid #DDDDDD;
     border-radius: 8px;
+`
+interface ImgSize {
+    imgWidth: string;
+    imgHeight: string;
+}
+export const ImgWrap = styled.div`
+    height: 795px;
+    width: 1125px;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 `;
+export const SignupImg = styled.label<ImgSize>`
+    width: ${props=>props.imgWidth};
+    height: ${props=>props.imgHeight};
+    background-color: #DDDDDD;
+    & span {
+        color: #AAAAAA;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+   `
 export const ProductInfoWrap = styled.div`
     display: flex;
     flex-direction: column;

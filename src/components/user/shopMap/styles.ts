@@ -16,6 +16,15 @@ export const Map = styled.div`
   height: 42vw;
   border-radius: 28px;
 
+  .currentLocation {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    background: #3fe294;
+    box-shadow: 0px 0px 4px 10px rgba(63, 228, 148, 0.25);
+  }
+
   .notClickedMarker {
     width: 24px;
     height: 24px;
@@ -30,8 +39,55 @@ export const Map = styled.div`
     border-radius: 50%;
 
     background: #55b6ce;
-    box-shadow: 0px 0px 4px 10px rgba(255, 111, 105, 0.25);
+    box-shadow: 0px 0px 4px 10px rgba(85, 182, 206, 0.25);
   }
+  .explanationShop {
+    width: 284px;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px 0;
+
+    & span,
+    a {
+      font-weight: bold;
+      font-size: 12px;
+      color: ${Darkgray};
+    }
+
+    > img {
+      width: 100%;
+      height: 128px;
+    }
+
+    > div {
+      > h1 {
+        font-size: 24px;
+        color: ${Darkgray};
+        margin-bottom: 4px;
+      }
+      > div {
+        > span:last-child {
+          color: ${Lightgray};
+        }
+      }
+    }
+
+    > div:last-child {
+      width: 100%;
+      height: 46px;
+      border: 2px solid ${Lightgray};
+      border-radius: 12px;
+      text-align: center;
+      > a {
+        line-height: 46px;
+      }
+    }
+  }
+
   > img {
     width: 200px;
     backgroundcolor: #000;

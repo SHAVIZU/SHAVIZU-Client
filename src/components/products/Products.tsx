@@ -4,11 +4,12 @@ import * as S from "./styles";
 type props = {
   product: any;
   isSearch: boolean;
+  onClick?: any;
 };
 
-const Products = ({ product, isSearch }: props) => {
+const Products = ({ product, isSearch, onClick }: props) => {
   return (
-    <S.Product>
+    <S.Product onClick={onClick}>
       <S.Item>
         <img src={product.image_url} />
         <span>{product.brand_name}</span>
@@ -32,7 +33,7 @@ const Products = ({ product, isSearch }: props) => {
         <></>
       ) : (
         <S.Stock>
-          {product.inventories.map((size: any, index: any) => {
+          {product.inventories?.map((size: any, index: any) => {
             return <Size key={index} size={size} />;
           })}
         </S.Stock>
