@@ -25,7 +25,7 @@ const AdminMain = () => {
     if (token) {
       getMyShopsItem(token).then((res) => setProduct(res.data.sells));
     }
-  });
+  }, [token]);
 
   return (
     <>
