@@ -1,20 +1,20 @@
 import { getRequestWithToken } from "../default";
 
-export const newProductRegisterRequest = async(token:string) => {
+type dataType = {
+    style_code:string;
+    brand_id?: number;
+    name: string;
+    category: string;
+    image_url:string;
+    unit: {
+        min:number|null;
+        max:number|null;
+        size:number|null;
+    }
+    is_free:boolean;
+}
+export const newProductRegisterRequest = async(token:string, data:dataType) => {
     try{
-        const data = {
-            style_code:"xxxx12",
-            brand_id:1,
-            name:"xxxx12",
-            category:"FOOT_WEAR",
-            image_url:"xxxx12",
-            unit: {
-                min:230,
-                max:280,
-                size:5
-            },
-            is_free:false
-        };
          const request = getRequestWithToken(token);
         const req = await request.post('/items', data);
         return req;

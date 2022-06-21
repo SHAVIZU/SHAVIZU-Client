@@ -63,14 +63,22 @@ export const BrandContainer = styled.div`
     width: 500px;
     height: 50px;
 `;
-export const BrandSearchContainer = styled.div<{zIndex: number}>`
+type brand = {
+    zIndex?: number;
+    brandLength?: number;
+}
+export const BrandSearchContainer = styled.div<brand>`
     width: 500px;
-    height: 60px;
+    height: calc(${props=>props.brandLength}*25px + 60px);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     position: relative;
     z-index: ${props=>props.zIndex};
+    background-color: white;
+    padding: 5px 10px;
+    box-sizing: border-box;
 `;
 export const CategoryContainer= styled(BrandSearchContainer)`
+    height: 80px;
     background-color: #ffffff;
     box-sizing: border-box;
     padding: 10px 15px;
@@ -78,13 +86,14 @@ export const CategoryContainer= styled(BrandSearchContainer)`
     & span{
         color: black;
     }
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 export const BrandSearchInput = styled.input`
     width: 95%;
     height: 30px;
     border: none;
     border-bottom: 1px solid black;
-    margin-left: 10px;
 `;
 export const StyleCodeInput = styled.input`
     border: none;
