@@ -156,6 +156,7 @@ const NewProductRegister = () => {
                   onClick={() => {
                     setBrand_id(b.id);
                     setItemInfo([b.name, itemInfo[1]]);
+                    setIsClick([!isClick[0], isClick[1]]);
                   }}
                 >
                   {b.name}
