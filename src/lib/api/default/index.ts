@@ -20,6 +20,19 @@ export const getRequestWithToken = (
 
   return request;
 };
+export const patchImgRequest = (token: string,
+  type: "json" | "blob" | "text" = "json") => {
+    const request = axios.create({
+    timeout: 10000,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      CacheControl: "no-cache",
+      contentType: 'multipart/form-data',
+    },
+    responseType: type,
+  });
+  return request;
+}
 
 export const getRequest = (type: "json" | "blob" | "text" = "json") => {
   const request = axios.create({
