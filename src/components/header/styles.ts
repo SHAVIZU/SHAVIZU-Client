@@ -230,6 +230,7 @@ export const ProductRegister = styled.div`
   align-items: center;
   border-left: 1px solid #eeeeee;
   margin-left: 32px;
+  cursor: pointer;
   > img {
     margin: 0 12px 0 32px;
   }

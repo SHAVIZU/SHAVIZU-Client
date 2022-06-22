@@ -35,11 +35,21 @@ const Login: FC = (): JSX.Element => {
         value={pw}
         onChange={onChange}
       />
-      <S.LoginProblem onClick={() => (window.location.href = "/change-pw")}>
+      <S.LoginProblem
+        onClick={() => {
+          window.location.href = "/change-pw";
+        }}
+      >
         비밀번호가 기억나지 않나요?
       </S.LoginProblem>
       <S.Submit onClick={() => requestLoginApi()}>로그인</S.Submit>
-      <S.LoginProblem>계정이 없으신가요?</S.LoginProblem>
+      <S.LoginProblem
+        onClick={() => {
+          window.location.href = "/signup";
+        }}
+      >
+        계정이 없으신가요?
+      </S.LoginProblem>
     </S.Container>
   );
 };

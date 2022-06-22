@@ -91,7 +91,7 @@ const NewProductRegister = () => {
         },
         is_free: isFree,
       };
-      if (isFree) {
+      if (!isFree) {
         data.unit.min = rangeValue[0];
         data.unit.max = rangeValue[1];
       }
