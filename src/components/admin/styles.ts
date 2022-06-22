@@ -191,6 +191,7 @@ export const ProductImg = styled.div<{is_url?: boolean}>`
     display: ${props=>props.is_url ? "none" : "flex"};
     flex-direction: column;
     justify-content: center;
+    overflow-y: scroll;
 `
 export const ProductImgWrap = styled(ProductImg)`
     justify-content: flex-start;

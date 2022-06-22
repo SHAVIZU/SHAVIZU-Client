@@ -191,9 +191,12 @@ const Header: FC = (): JSX.Element => {
       </S.SearchBar>
       <S.ProductRegister
         style={isAdmin ? { display: "flex" } : { display: "none" }}
+        onClick={() => {
+          window.location.href = "/product-re";
+        }}
       >
         <img src={SearchItemIcon} alt="" />
-        <span>새로운 판매 제품 등록</span>
+        <span>판매 제품 등록</span>
       </S.ProductRegister>
     </S.Header>
   );
