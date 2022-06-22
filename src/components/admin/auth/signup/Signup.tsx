@@ -3,6 +3,7 @@ import { useState } from "react";
 import * as S from "../../styles";
 import { signupRequest } from "../../../../lib/api/signup";
 import { useNavigate } from "react-router-dom";
+import { postImgRequest } from "../../../../lib/api/imgRegister";
 
 const imgSizeArr = [
   { width: "400", height: "280", id: "se" },
@@ -29,12 +30,19 @@ const Signup = () => {
       [name]: value,
     });
   };
+  const [imgURL, setImgURL] = useState<File[]>([]);
   const requestSignupApi = () => {
+    if (imgURL.length !== 4) {
+      alert("사진을 모두 삽입해주세요.");
+      return;
+    }
     signupRequest(id, pw, shopName, reNum, name, openDate)
       .then((res) => {
         localStorage.setItem("access_token", res.data.access_token);
-        alert("회원가입이 완료되었습니다.");
-        navigate("/");
+        const token = localStorage.getItem("access_token");
+        if (token) {
+          requestImgRegister(token);
+        }
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -51,7 +59,23 @@ const Signup = () => {
     if (!file) {
       return;
     }
-    console.log(file);
+    let arr = imgURL;
+    arr.push(file[0]);
+    console.log(arr);
+    setImgURL([...arr]);
+  };
+  const requestImgRegister = (token: string) => {
+    let formdata = new FormData();
+    for (let i = 0; i < 4; i++) {
+      formdata.append("files", imgURL[i]);
+    }
+    console.log(formdata);
+    postImgRequest(token, formdata)
+      .then(() => {
+        alert("회원가입이 완료되었습니다.");
+        navigate("/main");
+      })
+      .catch(() => alert("문제가 발생했습니다."));
   };
   return (
     <>
@@ -104,34 +128,54 @@ const Signup = () => {
         onChange={onChange}
       />
       <S.ImgWrap>
-        <S.SignupImg imgWidth="485px" imgHeight="275px" htmlFor="fi">
-          <span>1200 X 680</span>
-        </S.SignupImg>
-        <input
-          type="file"
-          id={"fi"}
-          style={{ display: "none" }}
-          accept=".jpg, jpeg, .png"
-          onChange={addFileFunc}
-        />
-        {imgSizeArr.map((size, i) => (
-          <S.SignupImg
-            imgWidth={size.width + "px"}
-            imgHeight={size.height + "px"}
-            htmlFor={size.id}
-            key={i}
-          >
-            <span>
-              {size.width} X {size.height}
-            </span>
+        {imgURL[0] ? (
+          <img
+            src={URL.createObjectURL(imgURL[0])}
+            style={{ width: "485px", height: "275px" }}
+            alt=""
+          />
+        ) : (
+          <>
+            <S.SignupImg imgWidth="485px" imgHeight="275px" htmlFor="fi">
+              <span>1200 X 680</span>
+            </S.SignupImg>
             <input
               type="file"
-              id={size.id}
-              onChange={addFileFunc}
+              id={"fi"}
               style={{ display: "none" }}
               accept=".jpg, jpeg, .png"
+              onChange={addFileFunc}
             />
-          </S.SignupImg>
+          </>
+        )}
+
+        {imgSizeArr.map((size, i) => (
+          <>
+            {imgURL[i + 1] ? (
+              <img
+                src={URL.createObjectURL(imgURL[i + 1])}
+                style={{ width: size.width + "px", height: size.height + "px" }}
+                alt=""
+              />
+            ) : (
+              <S.SignupImg
+                imgWidth={size.width + "px"}
+                imgHeight={size.height + "px"}
+                htmlFor={size.id}
+              >
+                <span>
+                  {size.width} X {size.height}
+                </span>
+                <input
+                  type="file"
+                  id={size.id}
+                  onChange={addFileFunc}
+                  style={{ display: "none" }}
+                  accept=".jpg, jpeg, .png"
+                />
+              </S.SignupImg>
+            )}
+          </>
         ))}
       </S.ImgWrap>
       <S.Submit onClick={() => requestSignupApi()}>회원가입</S.Submit>
