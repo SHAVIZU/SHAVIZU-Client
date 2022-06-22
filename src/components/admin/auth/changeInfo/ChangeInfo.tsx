@@ -27,7 +27,15 @@ const ChangeInfo = () => {
       <S.Input placeholder="전화번호" />
       <S.Input placeholder="상세설명" />
       <S.Input placeholder="영업시간" />
-      <S.Submit onClick={() => getLocation("가정북로76")}>변경</S.Submit>
+      <S.Submit
+        onClick={() => {
+          getLocation("가정북로76");
+          alert("정보가 변경되었습니다.");
+          window.location.href = "/main";
+        }}
+      >
+        변경
+      </S.Submit>
     </S.Container>
   );
 };
